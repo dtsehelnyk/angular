@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="column number">
+        <b>{{number + 1}}.</b>
+    </div>
+
+    <div class="column name">
+        <input
+            type="text"
+            [value]="todoInfo.name"
+        >
+    </div>
+
+    <div class="column description">
+        <textarea [(ngModel)]="todoInfo.decription"></textarea>
+    </div>
+
+    <div class="column">
+        <input
+            type="checkbox"
+            [checked]="!!todoInfo.isDone"
+        >
+    </div>
+</div>

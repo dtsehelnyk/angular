@@ -1,0 +1,33 @@
+.card {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #44f;
+    box-shadow: 2px 2px 6px rgba($color: #8b8b8b, $alpha: .7);
+}
+
+.column {
+    padding: 10px;
+}
+
+.number {
+    max-width: 100px;
+}
+
+.name {
+    flex-grow: 1;
+}
+
+.description {
+    width: 100%;
+}
+
+p {
+    font-size: 16px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 80px;
+}

@@ -1,0 +1,9 @@
+<div>
+    <app-todo-item
+        *ngFor="let todo of getList(); let id = index"
+        [todoInfo]="todo"
+        [number]="id"
+    ></app-todo-item>
+
+    <button (click)="handleChangeDirection()">Change direction</button>
+</div>
