@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="(todosList$ | async) as todosList">
     <app-todo-item
         *ngFor="let todo of todosList; let id = index"
         [todoInfo]="todo"
@@ -7,5 +7,5 @@
 
     <button (click)="handleChangeDirection()">Change direction</button>
     <button (click)="handleDeleteAll()">Delete all</button>
-    <button (click)="handleShowCount()">show count</button>
+
 </div>

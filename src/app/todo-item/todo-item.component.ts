@@ -1,5 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { Todo } from 'src/shared/introTodos';
+import { TodoService } from '../services/todo-service.service';
+
+export interface Todo {
+    name: string;
+    description: string;
+    isCompleted: boolean;
+    id: string;
+}
 
 @Component({
     selector: 'app-todo-item',
@@ -13,21 +20,23 @@ export class CardCompnent {
     @Input()todoInfo!: Todo;
     @Input()number!: number;
 
-    title = 'TODO item title';
-    cardDescription = 'Some description';
+    constructor(private todoService: TodoService) {}
 
-    handleTitleChange() {
-        this.title = 'I changed it!';
+    handleDeleteTodo() {
+        this.todoService.deleteTodo(this.todoInfo);
     }
+    // title: string = todoInc
 
-    handleInputChange(value: any) {
-        if (value?.target?.value) {
-            this.title = value.target.value;
-            return;
-        } 
+    // handleInputChange(value: any) {
+    //     console.log('??form value', value);
         
-        if (typeof value === 'string') {
-            this.cardDescription = value;
-        }
-    }
+    //     if (value?.target?.value) {
+    //         this.title = value.target.value;
+    //         return;
+    //     } 
+        
+    //     if (typeof value === 'string') {
+    //         this.cardDescription = value;
+    //     }
+    // }
 }

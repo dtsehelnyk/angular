@@ -1,18 +1,20 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Todo } from 'src/shared/introTodos';
-import { TodosService } from '../services/todos.service';
+import { Observable } from 'rxjs/internal/Observable';
+import { TodoService } from '../services/todo-service.service';
+import { Todo } from '../todo-item/todo-item.component';
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss'],
-  providers: [TodosService],
+  // providers: [TodoService],
 })
 export class TodoListComponent implements OnInit, OnChanges {
   isReverseDirection: boolean = false;
-  todosList: Todo[] = this.todosService.getTodos();
 
-  constructor(private todosService: TodosService){}
+  todosList$ = new Observable<Todo[]>();
+
+  constructor(private todoService: TodoService){}
 
   handleChangeDirection() {    
     this.isReverseDirection = !this.isReverseDirection;
@@ -20,21 +22,35 @@ export class TodoListComponent implements OnInit, OnChanges {
   }
 
   handleDeleteAll() {
-    this.todosService.deleteAll();
+    this.todoService.deleteAll();
+    this.handleUpdateTodos();
   }
 
   handleUpdateTodos() {
-    this.todosList = this.isReverseDirection 
-      ? this.todosService.getTodos().reverse()
-      : this.todosService.getTodos();
+    // this.todosList = this.isReverseDirection
+      // ? this.todoService.getTodos().reverse()
+      // : this.todoService.getTodos();
+    // this.todoService.getTodos().subscribe((todos) => {
+    //   this.todosList = todos;
+    // });
+
+    // console.log('????todosList', this.todosList);
   }
 
-  handleShowCount() {
-    console.log('??this.todosService.count: ', this.todosService.getCount());
-  }
+  ngOnInit(): void {
+    // @@ observer
+    // this.todosList = this.todoService.todos;
 
-  ngOnInit(): void {    
-    this.handleUpdateTodos();
+    // this.handleUpdateTodos();
+
+    // this.todoService.getTodos().subscribe((todos) => {
+    //   this.todosList = todos;
+    //   console.log(999);
+    // });
+
+    this.todosList$ = this.todoService.todos$;
+
+    console.log(123);
   }
 
   ngOnChanges(changes: SimpleChanges) {

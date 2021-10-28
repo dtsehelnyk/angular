@@ -15,9 +15,13 @@
     </div>
 
     <div class="column">
+        <button (click)="handleDeleteTodo()">Delete task</button>
+    </div>
+
+    <div class="column">
         <input
             type="checkbox"
-            [checked]="!!todoInfo.isDone"
+            [(ngModel)]="!!todoInfo.isCompleted"
         >
     </div>
 </div>

@@ -28,6 +28,12 @@ p {
 }
 
 textarea {
+    display: block;
     width: 100%;
-    min-height: 80px;
+    min-height: 50px;
+}
+
+button {
+    min-width: 100px;
+    min-height: 100%;
 }

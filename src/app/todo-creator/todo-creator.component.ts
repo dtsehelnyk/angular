@@ -1,29 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Todo } from 'src/shared/introTodos';
-import { TodosService } from '../services/todos.service';
+import { TodoService } from '../services/todo-service.service';
+// import { TodosService } from '../services/todo-service.service';
 
 @Component({
   selector: 'app-todo-creator',
   templateUrl: './todo-creator.component.html',
   styleUrls: ['./todo-creator.component.scss'],
-  providers: [TodosService],
 })
 export class TodoCreatorComponent {
 
-  constructor(private todosService: TodosService) { }
+  constructor(private todoService: TodoService) { }
   
+  // @@ form builder
   handleAddTodo(myForm: NgForm) {
-    this.todosService.addTodo({
+    this.todoService.addTodo({
       name: myForm.value.todoTitle,
       description: myForm.value.todoDescription,
-      isDone: false,
+      isCompleted: false,
+      id: new Date().toString(),
     });
-  }
 
-  handleCountIncrease() {
-    // this.todosService.count += 1;
-    this.todosService.setCount();
-    console.log('??this.todosService.count: ', this.todosService.count);
+    myForm.reset();
   }
 }
