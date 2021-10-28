@@ -1,0 +1,13 @@
+<form class="form" #myForm="ngForm">
+    <label>
+        <span>New TODO title:</span>
+        <input type="text" name="todoTitle" ngModel>
+    </label>
+    <label>
+        <span>New TODO description:</span>
+        <textarea name="todoDescription" ngModel></textarea>
+    </label>
+    <button (click)="handleAddTodo(myForm)">Add TODO</button>
+
+    <button (click)="handleCountIncrease()">Count +1</button>
+</form>

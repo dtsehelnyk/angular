@@ -1,10 +1,5 @@
 import { Component, Input } from '@angular/core';
-
-export interface Todo {
-    name: string;
-    decription: string;
-    isDone: boolean;
-}
+import { Todo } from 'src/shared/introTodos';
 
 @Component({
     selector: 'app-todo-item',
@@ -26,8 +21,6 @@ export class CardCompnent {
     }
 
     handleInputChange(value: any) {
-        console.log('??value', value);
-
         if (value?.target?.value) {
             this.title = value.target.value;
             return;

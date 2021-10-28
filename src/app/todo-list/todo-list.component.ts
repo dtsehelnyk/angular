@@ -1,44 +1,43 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Todo } from '../todo-item/todo-item.component';
+import { Todo } from 'src/shared/introTodos';
+import { TodosService } from '../services/todos.service';
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.scss']
+  styleUrls: ['./todo-list.component.scss'],
+  providers: [TodosService],
 })
 export class TodoListComponent implements OnInit, OnChanges {
   isReverseDirection: boolean = false;
-  todos: Todo[] = [
-    {name: 'name 1', decription: 'desc', isDone: false},
-    {name: 'name 2', decription: 'desc', isDone: false},
-    {name: 'name 3', decription: 'desc', isDone: false},
-    {name: 'name 4', decription: 'desc', isDone: false},
-  ]
+  todosList: Todo[] = this.todosService.getTodos();
 
-  // constructor(todos: Todo[]) {}
+  constructor(private todosService: TodosService){}
 
-  getList() {
-    return this.isReverseDirection ? this.todos.reverse() : this.todos;
-  }
-
-  handleChangeDirection() {
-    console.log('??111');
-    
+  handleChangeDirection() {    
     this.isReverseDirection = !this.isReverseDirection;
-    console.log('??this.isReverseDirection', this.isReverseDirection);
-    
+    this.handleUpdateTodos();
   }
 
-  handleAddListItem() {
-    this.todos.push();
+  handleDeleteAll() {
+    this.todosService.deleteAll();
   }
 
+  handleUpdateTodos() {
+    this.todosList = this.isReverseDirection 
+      ? this.todosService.getTodos().reverse()
+      : this.todosService.getTodos();
+  }
+
+  handleShowCount() {
+    console.log('??this.todosService.count: ', this.todosService.getCount());
+  }
 
   ngOnInit(): void {    
+    this.handleUpdateTodos();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     console.log('??rerendred');
   }
-
 }
