@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Todo } from "src/shared/introTodos";
 import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Todo } from '../todo-item/todo-item.component';
 
 interface TodoServicePayload {
   getTodos: () => void;
